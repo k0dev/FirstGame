@@ -1,2 +1,5 @@
-package firstgame;public enum ID {
+package firstgame;
+
+public enum ID {
+    GameMap()
 }

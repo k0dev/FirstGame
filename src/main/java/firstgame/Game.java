@@ -9,7 +9,9 @@ public class Game extends Canvas implements Runnable {
     public static final int GAME_WIDTH = 800;
     public static final int GAME_HEIGHT = 800;
     private boolean running = false;
+    private GameObjectsHandler gameObjectsHandler;
     public Game() {
+        gameObjectsHandler = new GameObjectsHandler();
         new Window(GAME_WIDTH, GAME_HEIGHT, this);
     }
 
@@ -76,6 +78,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void tick() {
+        gameObjectsHandler.tickAll();
     }
 
     private void render() {
@@ -86,8 +89,10 @@ public class Game extends Canvas implements Runnable {
         }
         Graphics g = bs.getDrawGraphics();
 
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, WIDTH, HEIGHT);
+        g.setColor(Color.MAGENTA);
+        g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+
+        gameObjectsHandler.renderAll((Graphics2D) g);
 
         g.dispose();
         bs.show();

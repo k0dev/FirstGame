@@ -1,9 +1,12 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group = 'firstgame'
 version = '1.0-SNAPSHOT'
+
+mainClassName = 'firstgame.Main'
 
 repositories {
     mavenCentral()

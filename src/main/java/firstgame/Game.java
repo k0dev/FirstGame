@@ -6,13 +6,14 @@ import java.awt.image.BufferStrategy;
 public class Game extends Canvas implements Runnable {
 
     private Thread gameThread;
-    public static final int GAME_WIDTH = 800;
-    public static final int GAME_HEIGHT = 800;
+    public static final int GAME_SIZE = 800;
     private boolean running = false;
     private GameObjectsHandler gameObjectsHandler;
     public Game() {
         gameObjectsHandler = new GameObjectsHandler();
-        new Window(GAME_WIDTH, GAME_HEIGHT, this);
+        gameObjectsHandler.add(new Map(GAME_SIZE));
+        setPreferredSize(new Dimension(GAME_SIZE, GAME_SIZE));
+        new Window(GAME_SIZE, GAME_SIZE, this);
     }
 
     public void start() {
@@ -90,7 +91,7 @@ public class Game extends Canvas implements Runnable {
         Graphics g = bs.getDrawGraphics();
 
         g.setColor(Color.MAGENTA);
-        g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        g.fillRect(0, 0, GAME_SIZE, GAME_SIZE);
 
         gameObjectsHandler.renderAll((Graphics2D) g);
 

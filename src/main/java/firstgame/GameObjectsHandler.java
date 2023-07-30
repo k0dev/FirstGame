@@ -25,4 +25,8 @@ public class GameObjectsHandler {
             object.tick();
         }
     }
+
+    public void add(GameObject object) {
+        gameObjects.add(object);
+    }
 }

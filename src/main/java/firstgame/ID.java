@@ -1,5 +1,7 @@
 package firstgame;
 
 public enum ID {
-    Map()
+    Map(),
+    Weapon(),
+    Bullet()
 }

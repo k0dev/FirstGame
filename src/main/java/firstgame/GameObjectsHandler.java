@@ -6,27 +6,28 @@ import java.util.List;
 
 public class GameObjectsHandler {
 
-    private List<GameObject> gameObjects;
+    private final List<GameObject> gameObjects;
 
     public GameObjectsHandler() {
         gameObjects = new LinkedList<>();
     }
 
     public void renderAll(Graphics2D g2d) {
-        for (GameObject object :
-                gameObjects) {
-            object.render(g2d);
-        }
+        //System.out.println("[*] Rendering " + gameObjects.size() + " game objects.");
+        for (int i = 0; i < gameObjects.size(); i++)
+            gameObjects.get(i).render(g2d);
     }
 
     public void tickAll() {
-        for (GameObject object :
-                gameObjects) {
-            object.tick();
-        }
+        for (int i = 0; i < gameObjects.size(); i++)
+            gameObjects.get(i).tick();
     }
 
-    public void add(GameObject object) {
+    public synchronized void add(GameObject object) {
         gameObjects.add(object);
+    }
+
+    public void remove(GameObject gameObject) {
+        gameObjects.remove(gameObject);
     }
 }

@@ -9,16 +9,37 @@ public class Game extends Canvas implements Runnable {
     public static final int GAME_SIZE = 800;
     private boolean running = false;
     private GameObjectsHandler gameObjectsHandler;
+
+    private static final int topWeaponX = GAME_SIZE/2;
+    private static final int topWeaponY = GAME_SIZE/2 - 40;
+    private static final int bottomWeaponX = GAME_SIZE/2;
+    private static final int bottomWeaponY = GAME_SIZE/2 + 40;
+    private static final int leftWeaponX = GAME_SIZE/2 - 40;
+    private static final int leftWeaponY = GAME_SIZE/2;
+    private static final int rightWeaponX = GAME_SIZE/2 + 40;
+    private static final int rightWeaponY = GAME_SIZE/2;
+
     public Game() {
         gameObjectsHandler = new GameObjectsHandler();
-        gameObjectsHandler.add(new Map(GAME_SIZE));
+
+        Map map = new Map(GAME_SIZE);
+        SimpleWeapon topWeapon = new SimpleWeapon(topWeaponX, topWeaponY, gameObjectsHandler, Direction.Top);
+        SimpleWeapon bottomWeapon = new SimpleWeapon(bottomWeaponX, bottomWeaponY, gameObjectsHandler, Direction.Bottom);
+        SimpleWeapon leftWeapon = new SimpleWeapon(leftWeaponX, leftWeaponY, gameObjectsHandler, Direction.Left);
+        SimpleWeapon rightWeapon = new SimpleWeapon(rightWeaponX, rightWeaponY, gameObjectsHandler, Direction.Right);
+
+        gameObjectsHandler.add(map);
+        gameObjectsHandler.add(topWeapon);
+        gameObjectsHandler.add(bottomWeapon);
+        gameObjectsHandler.add(leftWeapon);
+        gameObjectsHandler.add(rightWeapon);
         setPreferredSize(new Dimension(GAME_SIZE, GAME_SIZE));
         new Window(GAME_SIZE, GAME_SIZE, this);
     }
 
     public void start() {
-        gameThread = new Thread(this);
         running = true;
+        gameThread = new Thread(this);
         gameThread.start();
     }
     @Override
@@ -85,7 +106,7 @@ public class Game extends Canvas implements Runnable {
     private void render() {
         BufferStrategy bs = this.getBufferStrategy();
         if (bs == null) {
-            this.createBufferStrategy(3);
+            this.createBufferStrategy(2);
             return;
         }
         Graphics g = bs.getDrawGraphics();

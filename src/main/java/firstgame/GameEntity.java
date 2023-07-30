@@ -20,7 +20,7 @@ public abstract class GameEntity extends GameObject {
         x += velX;
         y += velY;
         if (x > Game.GAME_SIZE || y > Game.GAME_SIZE || x < 0 || y < 0) {
-            gameObjectsHandler.remove(this);
+            gameObjectsHandler.removeGameObject(this);
         }
     }
 

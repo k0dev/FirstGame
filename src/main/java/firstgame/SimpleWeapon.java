@@ -61,7 +61,7 @@ public class SimpleWeapon extends GameEntity implements Clickable {
     @Override
     public void onCollision(ID what) {
         if (what == ID.Enemy) {
-            System.out.println("Game over");
+            Game.gameState = GameState.GameOver;
         }
     }
 }

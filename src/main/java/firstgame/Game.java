@@ -9,6 +9,7 @@ public class Game extends Canvas implements Runnable {
     public static final int GAME_SIZE = 800;
     private boolean running = false;
     private GameObjectsHandler gameObjectsHandler;
+    public static GameState gameState;
 
     private static final int topWeaponX = GAME_SIZE/2;
     private static final int topWeaponY = GAME_SIZE/2 - 40;
@@ -72,6 +73,7 @@ public class Game extends Canvas implements Runnable {
         running = true;
         gameThread = new Thread(this);
         gameThread.start();
+        gameState = GameState.Playing;
     }
     @Override
     public void run() {
@@ -131,7 +133,8 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void tick() {
-        gameObjectsHandler.tickAll();
+        if (gameState == GameState.Playing)
+            gameObjectsHandler.tickAll();
     }
 
     private void render() {
@@ -145,7 +148,8 @@ public class Game extends Canvas implements Runnable {
         g.setColor(Color.MAGENTA);
         g.fillRect(0, 0, GAME_SIZE, GAME_SIZE);
 
-        gameObjectsHandler.renderAll((Graphics2D) g);
+        if (gameState == GameState.Playing)
+            gameObjectsHandler.renderAll((Graphics2D) g);
 
         g.dispose();
         bs.show();

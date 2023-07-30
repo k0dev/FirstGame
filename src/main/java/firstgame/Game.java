@@ -28,19 +28,18 @@ public class Game extends Canvas implements Runnable {
 
         Map map = new Map(GAME_SIZE);
         HUD hud = new HUD();
+        SimpleEnemySpawner simpleEnemySpawner = new SimpleEnemySpawner(gameObjectsHandler);
         SimpleWeapon topWeapon = new SimpleWeapon(topWeaponX, topWeaponY, gameObjectsHandler, Direction.Top);
         SimpleWeapon bottomWeapon = new SimpleWeapon(bottomWeaponX, bottomWeaponY, gameObjectsHandler, Direction.Bottom);
         SimpleWeapon leftWeapon = new SimpleWeapon(leftWeaponX, leftWeaponY, gameObjectsHandler, Direction.Left);
         SimpleWeapon rightWeapon = new SimpleWeapon(rightWeaponX, rightWeaponY, gameObjectsHandler, Direction.Right);
 
-        SimpleEnemy test = new SimpleEnemy(topWeaponX, 0, gameObjectsHandler, Direction.Bottom);
-
+        gameObjectsHandler.addGameObject(simpleEnemySpawner);
         gameObjectsHandler.addGameObject(map);
         gameObjectsHandler.addGameObject(topWeapon);
         gameObjectsHandler.addGameObject(bottomWeapon);
         gameObjectsHandler.addGameObject(leftWeapon);
         gameObjectsHandler.addGameObject(rightWeapon);
-        gameObjectsHandler.addGameObject(test);
         gameObjectsHandler.addGameObject(hud);
 
         gameObjectsHandler.addClickable(topWeapon);

@@ -26,6 +26,7 @@ public class GameObjectsHandler implements MouseListener {
         for (int i = 0; i < gameObjects.size(); i++) {
             GameObject gameObject = gameObjects.get(i);
             gameObject.tick();
+
             if (gameObject.id == ID.Enemy) {
                 GameEntity enemy = (GameEntity) gameObject;
                 for (int j = 0; j < gameObjects.size(); j++) {

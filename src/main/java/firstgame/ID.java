@@ -5,5 +5,6 @@ public enum ID {
     Weapon(),
     Bullet(),
     Hud(),
-    Enemy()
+    Enemy(),
+    Spawner()
 }

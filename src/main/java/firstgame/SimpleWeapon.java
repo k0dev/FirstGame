@@ -36,7 +36,7 @@ public class SimpleWeapon extends GameEntity implements Clickable {
     }
 
     private void shoot() {
-        if (bulletTickCounter > 0) {
+        if (bulletTickCounter > 0 || !Game.useBullets(1)) {
             bulletTickCounter--;
             return;
         }
@@ -50,7 +50,6 @@ public class SimpleWeapon extends GameEntity implements Clickable {
 
     @Override
     public void onClick() {
-        System.out.println(this + " have been clicked");
         shooting = !shooting;
     }
 

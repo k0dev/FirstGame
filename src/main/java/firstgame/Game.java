@@ -19,10 +19,14 @@ public class Game extends Canvas implements Runnable {
     private static final int rightWeaponX = GAME_SIZE/2 + 40;
     private static final int rightWeaponY = GAME_SIZE/2;
 
+    private static int bullets;
+
     public Game() {
+        bullets = 100;
         gameObjectsHandler = new GameObjectsHandler();
 
         Map map = new Map(GAME_SIZE);
+        HUD hud = new HUD();
         SimpleWeapon topWeapon = new SimpleWeapon(topWeaponX, topWeaponY, gameObjectsHandler, Direction.Top);
         SimpleWeapon bottomWeapon = new SimpleWeapon(bottomWeaponX, bottomWeaponY, gameObjectsHandler, Direction.Bottom);
         SimpleWeapon leftWeapon = new SimpleWeapon(leftWeaponX, leftWeaponY, gameObjectsHandler, Direction.Left);
@@ -33,6 +37,7 @@ public class Game extends Canvas implements Runnable {
         gameObjectsHandler.addGameObject(bottomWeapon);
         gameObjectsHandler.addGameObject(leftWeapon);
         gameObjectsHandler.addGameObject(rightWeapon);
+        gameObjectsHandler.addGameObject(hud);
 
         gameObjectsHandler.addClickable(topWeapon);
         gameObjectsHandler.addClickable(bottomWeapon);
@@ -42,6 +47,22 @@ public class Game extends Canvas implements Runnable {
         setPreferredSize(new Dimension(GAME_SIZE, GAME_SIZE));
         this.addMouseListener(gameObjectsHandler);
         new Window(GAME_SIZE, GAME_SIZE, this);
+    }
+
+    public static void addBullets(int amount) {
+        bullets += amount;
+    }
+
+    public static boolean useBullets(int amount) {
+        if (bullets >= amount) {
+            bullets -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    public static int getBullets() {
+        return bullets;
     }
 
     public void start() {

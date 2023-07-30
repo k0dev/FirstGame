@@ -3,5 +3,6 @@ package firstgame;
 public enum ID {
     Map(),
     Weapon(),
-    Bullet()
+    Bullet(),
+    Hud()
 }

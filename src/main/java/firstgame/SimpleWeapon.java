@@ -13,7 +13,7 @@ public class SimpleWeapon extends GameEntity implements Clickable {
     protected SimpleWeapon(int x, int y, GameObjectsHandler gameObjectsHandler, Direction direction) {
         super(ID.Weapon, x - 20, y - 20, gameObjectsHandler);
         this.direction = direction;
-        bulletTickCounter = 60;
+        bulletTickCounter = 30;
         shooting = false;
     }
 
@@ -40,11 +40,11 @@ public class SimpleWeapon extends GameEntity implements Clickable {
             bulletTickCounter--;
             return;
         }
-        bulletTickCounter = 60;
+        bulletTickCounter = 30;
 
         Bullet bullet = new Bullet(ID.Bullet, super.getX() + 20, super.getY() + 20, Color.WHITE, gameObjectsHandler);
-        bullet.setVelX(direction.getVelX());
-        bullet.setVelY(direction.getVelY());
+        bullet.setVelX(direction.getVelX() * 8);
+        bullet.setVelY(direction.getVelY() * 8);
         gameObjectsHandler.addGameObject(bullet);
     }
 
@@ -56,5 +56,12 @@ public class SimpleWeapon extends GameEntity implements Clickable {
     @Override
     public Rectangle getBounds() {
         return new Rectangle(getX(), getY(), 40, 40);
+    }
+
+    @Override
+    public void onCollision(ID what) {
+        if (what == ID.Enemy) {
+            System.out.println("Game over");
+        }
     }
 }

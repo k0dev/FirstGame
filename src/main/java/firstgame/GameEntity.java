@@ -1,5 +1,7 @@
 package firstgame;
 
+import java.awt.*;
+
 public abstract class GameEntity extends GameObject {
     private int x;
     private int y;
@@ -39,4 +41,8 @@ public abstract class GameEntity extends GameObject {
     public int getY() {
         return y;
     }
+
+    public abstract Rectangle getBounds();
+
+    public abstract void onCollision(ID what);
 }

@@ -23,8 +23,28 @@ public class GameObjectsHandler implements MouseListener {
     }
 
     public void tickAll() {
-        for (int i = 0; i < gameObjects.size(); i++)
-            gameObjects.get(i).tick();
+        for (int i = 0; i < gameObjects.size(); i++) {
+            GameObject gameObject = gameObjects.get(i);
+            gameObject.tick();
+            if (gameObject.id == ID.Enemy) {
+                GameEntity enemy = (GameEntity) gameObject;
+                for (int j = 0; j < gameObjects.size(); j++) {
+                    if (gameObjects.get(j).id == ID.Bullet) {
+                        GameEntity bullet = (GameEntity) gameObjects.get(j);
+                        if (enemy.getBounds().intersects(bullet.getBounds())) {
+                            enemy.onCollision(ID.Bullet);
+                            bullet.onCollision(ID.Enemy);
+                        }
+                    } else if (gameObjects.get(j).id == ID.Weapon) {
+                        GameEntity weapon = (GameEntity) gameObjects.get(j);
+                        if (enemy.getBounds().intersects(weapon.getBounds())) {
+                            enemy.onCollision(ID.Weapon);
+                            weapon.onCollision(ID.Enemy);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public synchronized void addGameObject(GameObject object) {

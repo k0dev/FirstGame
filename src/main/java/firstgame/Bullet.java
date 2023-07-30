@@ -15,4 +15,15 @@ public class Bullet extends GameEntity {
         g2d.setColor(color);
         g2d.fillRect(super.getX() - 3, super.getY() - 3, 6, 6);
     }
+
+    @Override
+    public Rectangle getBounds() {
+        return new Rectangle(getX(), getY(), 6, 6);
+    }
+
+    @Override
+    public void onCollision(ID what) {
+        if (what == ID.Enemy)
+            gameObjectsHandler.removeGameObject(this);
+    }
 }

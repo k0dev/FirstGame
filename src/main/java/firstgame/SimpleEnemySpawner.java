@@ -4,11 +4,16 @@ import java.awt.*;
 
 public class SimpleEnemySpawner extends GameObject {
     private final GameObjectsHandler gameObjectsHandler;
-    private int waveTimer = 180;
+    private int numberOfWaves;
+    private final int ticksBetweenWaves;
+    private int waveTimer;
 
-    protected SimpleEnemySpawner(GameObjectsHandler gameObjectsHandler) {
+    protected SimpleEnemySpawner(GameObjectsHandler gameObjectsHandler, int numberOfWaves, int ticksBetweenWaves) {
         super(ID.Spawner);
         this.gameObjectsHandler = gameObjectsHandler;
+        this.numberOfWaves = numberOfWaves;
+        this.ticksBetweenWaves = ticksBetweenWaves;
+        waveTimer = ticksBetweenWaves;
     }
 
     @Override
@@ -17,11 +22,16 @@ public class SimpleEnemySpawner extends GameObject {
 
     @Override
     public void tick() {
+        if (numberOfWaves <= 0) {
+            gameObjectsHandler.removeGameObject(this);
+            return;
+        }
         if (waveTimer > 0) {
             waveTimer--;
             return;
         }
-        waveTimer = 360;
+        numberOfWaves -= 1;
+        waveTimer = ticksBetweenWaves;
         SimpleEnemy top = new SimpleEnemy(Game.GAME_SIZE/2 - 15, 0, gameObjectsHandler, Direction.Bottom);
         SimpleEnemy bottom = new SimpleEnemy(Game.GAME_SIZE/2 - 15, Game.GAME_SIZE, gameObjectsHandler, Direction.Top);
         SimpleEnemy left = new SimpleEnemy(0, Game.GAME_SIZE/2 - 15, gameObjectsHandler, Direction.Right);

@@ -23,6 +23,7 @@ public class SimpleEnemy extends GameEntity {
         }
         if (health <= 0) {
             gameObjectsHandler.removeGameObject(this);
+            Game.addScore(1);
         }
     }
 

@@ -8,8 +8,10 @@ public class Game extends Canvas implements Runnable {
     private Thread gameThread;
     public static final int GAME_SIZE = 800;
     private boolean running = false;
-    private GameObjectsHandler gameObjectsHandler;
+    private final GameObjectsHandler gameObjectsHandler;
     public static GameState gameState;
+
+    private static int score = 0;
 
     private static final int topWeaponX = GAME_SIZE/2;
     private static final int topWeaponY = GAME_SIZE/2 - 40;
@@ -19,7 +21,6 @@ public class Game extends Canvas implements Runnable {
     private static final int leftWeaponY = GAME_SIZE/2;
     private static final int rightWeaponX = GAME_SIZE/2 + 40;
     private static final int rightWeaponY = GAME_SIZE/2;
-
     private static int bullets;
 
     public Game() {
@@ -28,7 +29,7 @@ public class Game extends Canvas implements Runnable {
 
         Map map = new Map(GAME_SIZE);
         HUD hud = new HUD();
-        SimpleEnemySpawner simpleEnemySpawner = new SimpleEnemySpawner(gameObjectsHandler);
+        SimpleEnemySpawner simpleEnemySpawner = new SimpleEnemySpawner(gameObjectsHandler, 2, 120);
         SimpleWeapon topWeapon = new SimpleWeapon(topWeaponX, topWeaponY, gameObjectsHandler, Direction.Top);
         SimpleWeapon bottomWeapon = new SimpleWeapon(bottomWeaponX, bottomWeaponY, gameObjectsHandler, Direction.Bottom);
         SimpleWeapon leftWeapon = new SimpleWeapon(leftWeaponX, leftWeaponY, gameObjectsHandler, Direction.Left);
@@ -66,6 +67,16 @@ public class Game extends Canvas implements Runnable {
 
     public static int getBullets() {
         return bullets;
+    }
+
+    public static void addScore(int amount) {
+        if (amount > 0) {
+            score += amount;
+        }
+    }
+
+    public static int getScore() {
+        return score;
     }
 
     public void start() {
@@ -162,4 +173,6 @@ public class Game extends Canvas implements Runnable {
         }
         running = false;
     }
+
+
 }

@@ -29,6 +29,7 @@ public class Game extends Canvas implements Runnable {
 
         Map map = new Map(GAME_SIZE);
         HUD hud = new HUD();
+
         SimpleEnemySpawner simpleEnemySpawner = new SimpleEnemySpawner(gameObjectsHandler, 2, 120);
         SimpleWeapon topWeapon = new SimpleWeapon(topWeaponX, topWeaponY, gameObjectsHandler, Direction.Top);
         SimpleWeapon bottomWeapon = new SimpleWeapon(bottomWeaponX, bottomWeaponY, gameObjectsHandler, Direction.Bottom);
@@ -37,6 +38,7 @@ public class Game extends Canvas implements Runnable {
 
         gameObjectsHandler.addGameObject(simpleEnemySpawner);
         gameObjectsHandler.addGameObject(map);
+        new Shop(gameObjectsHandler);
         gameObjectsHandler.addGameObject(topWeapon);
         gameObjectsHandler.addGameObject(bottomWeapon);
         gameObjectsHandler.addGameObject(leftWeapon);

@@ -6,5 +6,6 @@ public enum ID {
     Bullet(),
     Hud(),
     Enemy(),
-    Spawner()
+    Spawner(),
+    Shop()
 }

@@ -13,8 +13,8 @@ public class HUD extends GameObject {
         g2d.setColor(Color.WHITE);
         g2d.drawString("Bullets: ", 10, 50);
         g2d.drawString(Integer.toString(Game.getBullets()), 100, 50);
-        g2d.drawString("Score: ", 10, 80);
-        g2d.drawString(Integer.toString(Game.getScore()), 100, 80);
+        g2d.drawString("Points: ", 10, 80);
+        g2d.drawString(Integer.toString(Game.getPoints()), 100, 80);
     }
 
     @Override

@@ -11,7 +11,7 @@ public class Game extends Canvas implements Runnable {
     private final GameObjectsHandler gameObjectsHandler;
     public static GameState gameState;
 
-    private static int score = 0;
+    private static int points = 0;
 
     private static final int topWeaponX = GAME_SIZE/2;
     private static final int topWeaponY = GAME_SIZE/2 - 40;
@@ -69,14 +69,12 @@ public class Game extends Canvas implements Runnable {
         return bullets;
     }
 
-    public static void addScore(int amount) {
-        if (amount > 0) {
-            score += amount;
-        }
+    public static void addPoints(int amount) {
+        points += amount;
     }
 
-    public static int getScore() {
-        return score;
+    public static int getPoints() {
+        return points;
     }
 
     public void start() {

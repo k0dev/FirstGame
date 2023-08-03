@@ -5,6 +5,7 @@ import java.awt.*;
 public class SimpleWeapon extends GameEntity implements Clickable {
 
     private int bulletTickCounter;
+    public int fireRate = 2;
 
     private final Direction direction;
 
@@ -13,7 +14,7 @@ public class SimpleWeapon extends GameEntity implements Clickable {
     protected SimpleWeapon(int x, int y, GameObjectsHandler gameObjectsHandler, Direction direction) {
         super(ID.Weapon, x - 20, y - 20, gameObjectsHandler);
         this.direction = direction;
-        bulletTickCounter = 30;
+        bulletTickCounter =  Game.TARGET_TPS / fireRate;
         shooting = false;
     }
 
@@ -40,7 +41,7 @@ public class SimpleWeapon extends GameEntity implements Clickable {
             bulletTickCounter--;
             return;
         }
-        bulletTickCounter = 30;
+        bulletTickCounter = Game.TARGET_TPS / fireRate;
 
         Bullet bullet = new Bullet(ID.Bullet, super.getX() + 20, super.getY() + 20, Color.WHITE, gameObjectsHandler);
         bullet.setVelX(direction.getVelX() * 8);

@@ -6,6 +6,7 @@ import java.awt.image.BufferStrategy;
 public class Game extends Canvas implements Runnable {
 
     private Thread gameThread;
+    public static final int TARGET_TPS = 60;
     public static final int GAME_SIZE = 800;
     private boolean running = false;
     private final GameObjectsHandler gameObjectsHandler;
@@ -23,6 +24,11 @@ public class Game extends Canvas implements Runnable {
     private static final int rightWeaponY = GAME_SIZE/2;
     private static int bullets;
 
+    public static SimpleWeapon topWeapon;
+    public static SimpleWeapon bottomWeapon;
+    public static SimpleWeapon leftWeapon;
+    public static SimpleWeapon rightWeapon;
+
     public Game() {
         bullets = 100;
         gameObjectsHandler = new GameObjectsHandler();
@@ -31,10 +37,10 @@ public class Game extends Canvas implements Runnable {
         HUD hud = new HUD();
 
         SimpleEnemySpawner simpleEnemySpawner = new SimpleEnemySpawner(gameObjectsHandler, 2, 120);
-        SimpleWeapon topWeapon = new SimpleWeapon(topWeaponX, topWeaponY, gameObjectsHandler, Direction.Top);
-        SimpleWeapon bottomWeapon = new SimpleWeapon(bottomWeaponX, bottomWeaponY, gameObjectsHandler, Direction.Bottom);
-        SimpleWeapon leftWeapon = new SimpleWeapon(leftWeaponX, leftWeaponY, gameObjectsHandler, Direction.Left);
-        SimpleWeapon rightWeapon = new SimpleWeapon(rightWeaponX, rightWeaponY, gameObjectsHandler, Direction.Right);
+        topWeapon = new SimpleWeapon(topWeaponX, topWeaponY, gameObjectsHandler, Direction.Top);
+        bottomWeapon = new SimpleWeapon(bottomWeaponX, bottomWeaponY, gameObjectsHandler, Direction.Bottom);
+        leftWeapon = new SimpleWeapon(leftWeaponX, leftWeaponY, gameObjectsHandler, Direction.Left);
+        rightWeapon = new SimpleWeapon(rightWeaponX, rightWeaponY, gameObjectsHandler, Direction.Right);
 
         gameObjectsHandler.addGameObject(simpleEnemySpawner);
         gameObjectsHandler.addGameObject(map);
@@ -90,7 +96,6 @@ public class Game extends Canvas implements Runnable {
         long lastTime = System.nanoTime();
         long tickTimer = 0;
         long fpsTimer = 0;
-        final int TARGET_TPS = 60;
         final long TIME_PER_TICK = 1000000000L / TARGET_TPS;
         final int MAX_RENDER_SKIP = 5;
         int ticks = 0;

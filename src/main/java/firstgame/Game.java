@@ -165,9 +165,19 @@ public class Game extends Canvas implements Runnable {
 
         if (gameState == GameState.Playing)
             gameObjectsHandler.renderAll((Graphics2D) g);
+        if (gameState == GameState.GameOver)
+            renderGameOver((Graphics2D) g);
 
         g.dispose();
         bs.show();
+    }
+
+    private void renderGameOver(Graphics2D g2d) {
+        g2d.setColor(Color.BLACK);
+        g2d.fillRect(0, 0, GAME_SIZE, GAME_SIZE);
+        g2d.setColor(Color.WHITE);
+        g2d.setFont(getFont().deriveFont(30.0f));
+        g2d.drawString("Game Over", GAME_SIZE/2-70, GAME_SIZE/2-30);
     }
 
     private void stop() {
